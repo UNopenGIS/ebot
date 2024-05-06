@@ -1,6 +1,12 @@
 # ebot
 expression bot (ebot): an LLM-backed Discord bot for Smart Maps
 
+## Prerequisite
+### Ruby gems
+- `discordrb`
+- `concurrent-ruby`
+- `ollama-ai`
+
 ## How to use
 `ruby ebot.rb`
 
