@@ -37,6 +37,10 @@ $bot.ready {
 }
 
 $bot.message {|e|
+  if e.channel.id != CHANNEL_ID
+    $stderr.print "returning because #{e.channel.id} is not #ebot.\n"
+    next
+  end
   if CONTROL_REGEXP.match(e.content)
     $stderr.print "ignored \"#{e.content}\" because it is a CONTROL.\n"
     next
@@ -45,10 +49,6 @@ $bot.message {|e|
     msg = "ignored \"#{e.content}\" because the queue is full.\n"
     $stderr.print "#{msg}\n"
     e.respond("#{CONTROL_SEQUENCE} #{msg}")
-    next
-  end
-  if e.channel.id != CHANNEL_ID
-    $stderr.print "returning because #{e.channel.id} is not #ebot.\n"
     next
   end
   $task_queue.post do
